@@ -10,56 +10,83 @@ namespace Fixture.Persistence.ADO
 {
     public class TournamentRepository : ITournamentRepository
     {
+        private const string NameColumn = "Name";
+        private const string IdColumn = "Id";
+
         private Storage storage;
 
         public TournamentRepository(Storage storage)
         {
             this.storage = storage;
-        }
+        }        
 
         public IEnumerable<Tournament> Get()
         {
-            const string queryString = "SELECT Id, Name FROM [fixture].[Tournament]";
-
-            var result = new List<Tournament>();
+            const string queryString = "SELECT Id, Name FROM fixture.Tournament";
 
             var command = storage.CreateCommand();
 
-            var dataTable = command.ExecuteQuery(queryString);
-
-            return result;
+            return command.GetEntityCollection(queryString, MapEntity);
         }
 
-        //public Tournament Update(Tournament tournament)
-        //{
-        //    const string queryString = "UPDATE Tournament SET Id = @Id, Name = @Name WHERE ";
+        public Tournament Get(int id)
+        {
+            const string queryString = "SELECT Id, Name FROM fixture.Tournament WHERE Id = @Id";
 
-        //    var connection = new SqlConnection(connectionString);
+            var command = storage.CreateCommand();
 
-        //    using (connection)
-        //    {
-        //        var command = new SqlCommand(queryString, connection);
+            command.AddParam(IdColumn, id);
 
-        //        command.Connection = connection;
+            return command.GetEntity(queryString, MapEntity);
+        }
 
-        //        command.Parameters.AddWithValue("@Id", tournament.Id);
-        //        command.Parameters.AddWithValue("@Name", tournament.Name);
-        //        command.Parameters.
+        public Tournament Create(Tournament entity)
+        {
+            const string queryString = "INSERT INTO fixture.Tournament (Name) VALUES(@Name)";
 
-        //        connection.Open();
-        //        command.ExecuteNonQuery();
-        //    }
+            var command = storage.CreateCommand();
 
-        //    return new Tournament();
-        //}
+            command.AddParam(NameColumn, entity.Name);
 
-        protected Tournament MapTournament(IDataReader reader)
+            var entityId = command.CreateEntity<int>(queryString);
+
+            entity.Id = entityId;
+
+            return entity;
+        }
+
+        public Tournament Update(Tournament entity)
+        {
+            const string queryString = "UPDATE fixture.Tournament SET Name = @Name WHERE Id = @Id";
+
+            var command = storage.CreateCommand();
+
+            command.AddParam(NameColumn, entity.Name);
+            command.AddParam(IdColumn, entity.Id);
+
+            command.ExecuteNonQuery(queryString);
+
+            return entity;
+        }
+
+        public void Delete(int id)
+        {
+            const string queryString = "DELETE FROM fixture.Tournament WHERE Id = @Id";
+
+            var command = storage.CreateCommand();
+
+            command.AddParam(IdColumn, id);
+
+            command.ExecuteNonQuery(queryString);
+        }
+
+        public Tournament MapEntity(IDataReader reader)
         {
             return new Tournament
             {
-                Id = (int)reader["Id"],
-                Name = reader["Name"].ToString()
+                Id = (int)reader[IdColumn],
+                Name = reader[NameColumn].ToString()
             };
-        }
+        }        
     }
 }
