@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Persistence.ADO
+namespace Common.Persistence.Ado
 {
     public class Parameter
     {

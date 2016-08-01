@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 
-namespace Common.Persistence.ADO
+namespace Common.Persistence.Ado
 {
     public interface ICommand
     {

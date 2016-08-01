@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.App", "1.App", "{D108A11C-8A40-4396-8D93-D7DF23065016}"
 EndProject
@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fixture.Domain", "src\App\D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fixture.Persistence", "src\App\Persistence\Fixture.Persistence.csproj", "{642D36B3-C9D2-4253-8C84-B0053FBFB080}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fixture.Persistence.ADO", "src\App\PersistenceImpl\Fixture.Persistence.ADO.csproj", "{67745846-08DD-4B45-BBF0-8F9D6A642655}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fixture.Persistence.Ado", "src\App\PersistenceImpl\Fixture.Persistence.Ado.csproj", "{67745846-08DD-4B45-BBF0-8F9D6A642655}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fixture.Services", "src\App\Services\Fixture.Services.csproj", "{356094FD-B01B-47E6-BBD7-CFD6C28CAD89}"
 EndProject
@@ -27,7 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.Common", "0.Common", "{DB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Persistence", "src\Common\Common.Persistence\Common.Persistence.csproj", "{504AF4CC-1F37-45ED-92C1-A1448A5080EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Persistence.ADO", "src\Common\Common.Persistence.ADO\Common.Persistence.ADO.csproj", "{0611D262-B4B8-4DE0-9C2B-858440147ED5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Persistence.Ado", "src\Common\Common.Persistence.ADO\Common.Persistence.Ado.csproj", "{0611D262-B4B8-4DE0-9C2B-858440147ED5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

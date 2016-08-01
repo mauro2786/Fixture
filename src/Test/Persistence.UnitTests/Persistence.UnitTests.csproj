@@ -58,17 +58,17 @@
       <Project>{43962339-105b-4a81-b23a-c2ad5c7465aa}</Project>
       <Name>Fixture.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\App\PersistenceImpl\Fixture.Persistence.ADO.csproj">
+    <ProjectReference Include="..\..\App\PersistenceImpl\Fixture.Persistence.Ado.csproj">
       <Project>{67745846-08dd-4b45-bbf0-8f9d6a642655}</Project>
-      <Name>Fixture.Persistence.ADO</Name>
+      <Name>Fixture.Persistence.Ado</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\App\Persistence\Fixture.Persistence.csproj">
       <Project>{642d36b3-c9d2-4253-8c84-b0053fbfb080}</Project>
       <Name>Fixture.Persistence</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Common\Common.Persistence.ADO\Common.Persistence.ADO.csproj">
+    <ProjectReference Include="..\..\Common\Common.Persistence.ADO\Common.Persistence.Ado.csproj">
       <Project>{0611d262-b4b8-4de0-9c2b-858440147ed5}</Project>
-      <Name>Common.Persistence.ADO</Name>
+      <Name>Common.Persistence.Ado</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Common\Common.Persistence\Common.Persistence.csproj">
       <Project>{504af4cc-1f37-45ed-92c1-a1448a5080ec}</Project>

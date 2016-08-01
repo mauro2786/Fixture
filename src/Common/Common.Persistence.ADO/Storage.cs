@@ -1,4 +1,4 @@
-﻿namespace Common.Persistence.ADO
+﻿namespace Common.Persistence.Ado
 {
     public sealed class Storage
     {

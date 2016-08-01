@@ -1,12 +1,9 @@
-﻿using Common.Persistence.ADO;
+﻿using Common.Persistence.Ado;
 using Fixture.Domain;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
-using System.Data.SqlClient;
 
-namespace Fixture.Persistence.ADO
+namespace Fixture.Persistence.Ado
 {
     public class TournamentRepository : ITournamentRepository
     {

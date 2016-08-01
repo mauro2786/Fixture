@@ -1,12 +1,12 @@
-﻿using Fixture.Domain;
+﻿using Common.Persistence.Ado;
+using Fixture.Domain;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Common.Persistence.ADO
+namespace Common.Persistence.Ado
 {
     /// <summary>
     /// Handles database connection and execution of SQL queries.
@@ -154,10 +154,6 @@ namespace Common.Persistence.ADO
             return Execute(queryString,
                             command =>
                             {
-                                var listType = typeof(List<>).MakeGenericType(typeof(TEntity));
-
-                                var list = (IList<TEntity>)Activator.CreateInstance(listType);
-
                                 using (var reader = command.ExecuteReader())
                                 {
                                     while (reader.Read())
@@ -181,9 +177,7 @@ namespace Common.Persistence.ADO
             return Execute(queryString,
                             command =>
                             {
-                                queryString = queryString + ";" + LastInsertedIdStatement;
-
-                                command.CommandText = queryString;
+                                command.CommandText = string.Format("{0};{1}", queryString, LastInsertedIdStatement);
 
                                 var lastInsertedId = command.ExecuteScalar();
 

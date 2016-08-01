@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Fixture.Persistence.ADO")]
+[assembly: AssemblyTitle("Fixture.Persistence.Ado")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("______")]
-[assembly: AssemblyProduct("Fixture.Persistence.ADO")]
+[assembly: AssemblyProduct("Fixture.Persistence.Ado")]
 [assembly: AssemblyCopyright("Copyright © ______ 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

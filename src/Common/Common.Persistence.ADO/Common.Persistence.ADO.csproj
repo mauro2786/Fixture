@@ -7,8 +7,8 @@
     <ProjectGuid>{0611D262-B4B8-4DE0-9C2B-858440147ED5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Common.Persistence.ADO</RootNamespace>
-    <AssemblyName>Common.Persistence.ADO</AssemblyName>
+    <RootNamespace>Common.Persistence.Ado</RootNamespace>
+    <AssemblyName>Common.Persistence.Ado</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

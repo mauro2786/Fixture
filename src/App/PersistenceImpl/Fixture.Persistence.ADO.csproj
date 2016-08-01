@@ -7,8 +7,8 @@
     <ProjectGuid>{67745846-08DD-4B45-BBF0-8F9D6A642655}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Fixture.Persistence.ADO</RootNamespace>
-    <AssemblyName>Fixture.Persistence.ADO</AssemblyName>
+    <RootNamespace>Fixture.Persistence.Ado</RootNamespace>
+    <AssemblyName>Fixture.Persistence.Ado</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -48,9 +48,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Common.Persistence.ADO\Common.Persistence.ADO.csproj">
+    <ProjectReference Include="..\..\Common\Common.Persistence.ADO\Common.Persistence.Ado.csproj">
       <Project>{0611d262-b4b8-4de0-9c2b-858440147ed5}</Project>
-      <Name>Common.Persistence.ADO</Name>
+      <Name>Common.Persistence.Ado</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Common\Common.Persistence\Common.Persistence.csproj">
       <Project>{504AF4CC-1F37-45ED-92C1-A1448A5080EC}</Project>
