@@ -66,6 +66,14 @@
       <Project>{642d36b3-c9d2-4253-8c84-b0053fbfb080}</Project>
       <Name>Fixture.Persistence</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Common\Common.Persistence.ADO\Common.Persistence.ADO.csproj">
+      <Project>{0611d262-b4b8-4de0-9c2b-858440147ed5}</Project>
+      <Name>Common.Persistence.ADO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Common.Persistence\Common.Persistence.csproj">
+      <Project>{504af4cc-1f37-45ed-92c1-a1448a5080ec}</Project>
+      <Name>Common.Persistence</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

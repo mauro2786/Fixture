@@ -5,19 +5,24 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Compilation;
 using System.Web.Http;
+using System.Collections.Generic;
 
 namespace API
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
+        private const string PersistenceObjectPostFix = "Repository";
+        private const string ServiceObjectPostFix = "Service";
+        private const string DefaultConnectionString = "default";
+
         private ContainerBuilder builder;
 
         protected void Application_Start()
-        {            
+        {
             GlobalConfiguration.Configure(WebApiConfig.Register);
             ConfigureAutofac();
         }
-        
+
         protected void ConfigureAutofac()
         {
             builder = new ContainerBuilder();
@@ -28,21 +33,13 @@ namespace API
             // Register your Web API controllers.
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
-            var asd = BuildManager.GetReferencedAssemblies().Cast<Assembly>();            
+            var assemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>();
 
             //Configures ADO data access and repositories dependencies
-            ConfigureADODependencies();
+            ConfigureADODependencies(assemblies);
 
-            //var assemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>();
-
-            //foreach (var assembly in assemblies)
-            //{
-            //    //TODO: filter assemblies
-            //    builder.RegisterAssemblyTypes(assembly);
-            //}
-
-            // OPTIONAL: Register the Autofac filter provider.
-            //builder.RegisterWebApiFilterProvider(config);
+            //Configures Services dependencies
+            ConfigureServicesDependencies(assemblies);
 
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();
@@ -52,17 +49,34 @@ namespace API
         /// <summary>
         /// Configures ADO data access and repositories dependencies
         /// </summary>
-        protected void ConfigureADODependencies()
+        private void ConfigureADODependencies(IEnumerable<Assembly> assemblies)
         {
-            var sd = asd.First(x => x.FullName.Contains("Persistence.ADO"));
+            const string ADOPersistenceAssemblyName = "Fixture.Persistence.ADO";
 
-            builder.RegisterAssemblyTypes(sd)
-                   .Where(t => t.Name.EndsWith("Repository"))
-                   .AsImplementedInterfaces()
-                  .InstancePerLifetimeScope();
+            var persistenceAssembly = assemblies.First(x => x.FullName.Contains(ADOPersistenceAssemblyName));
+
+            builder.RegisterAssemblyTypes(persistenceAssembly)
+               .Where(t => t.Name.EndsWith(PersistenceObjectPostFix))
+               .AsImplementedInterfaces()
+              .InstancePerLifetimeScope();
 
             builder.RegisterType(typeof(Common.Persistence.ADO.Storage))
-                .WithParameter(new TypedParameter(typeof(string), ConfigurationManager.ConnectionStrings["default"].ToString()));
+                .WithParameter(new TypedParameter(typeof(string), ConfigurationManager.ConnectionStrings[DefaultConnectionString].ToString()));
+        }
+
+        /// <summary>
+        /// Configures Services dependencies
+        /// </summary>
+        private void ConfigureServicesDependencies(IEnumerable<Assembly> assemblies)
+        {
+            const string ServicesImplAssemblyName = "Fixture.ServicesImpl";
+
+            var servicesImplAssembly = assemblies.First(x => x.FullName.Contains(ServicesImplAssemblyName));
+
+            builder.RegisterAssemblyTypes(servicesImplAssembly)
+                .Where(t => t.Name.EndsWith(ServiceObjectPostFix))
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
         }
     }
 }

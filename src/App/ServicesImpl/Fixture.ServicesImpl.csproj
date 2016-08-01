@@ -41,6 +41,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TournamentService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.Persistence\Common.Persistence.csproj">
+      <Project>{504AF4CC-1F37-45ED-92C1-A1448A5080EC}</Project>
+      <Name>Common.Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Fixture.Domain.csproj">
+      <Project>{43962339-105b-4a81-b23a-c2ad5c7465aa}</Project>
+      <Name>Fixture.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Persistence\Fixture.Persistence.csproj">
+      <Project>{642d36b3-c9d2-4253-8c84-b0053fbfb080}</Project>
+      <Name>Fixture.Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\Fixture.Services.csproj">
+      <Project>{356094fd-b01b-47e6-bbd7-cfd6c28cad89}</Project>
+      <Name>Fixture.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
