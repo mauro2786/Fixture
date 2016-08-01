@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fixture.Domain", "src\App\D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fixture.Persistence", "src\App\Persistence\Fixture.Persistence.csproj", "{642D36B3-C9D2-4253-8C84-B0053FBFB080}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fixture.Persistence.Ado", "src\App\PersistenceImpl\Fixture.Persistence.Ado.csproj", "{67745846-08DD-4B45-BBF0-8F9D6A642655}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fixture.Persistence.Ado", "src\App\Persistence.Ado\Fixture.Persistence.Ado.csproj", "{67745846-08DD-4B45-BBF0-8F9D6A642655}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fixture.Services", "src\App\Services\Fixture.Services.csproj", "{356094FD-B01B-47E6-BBD7-CFD6C28CAD89}"
 EndProject

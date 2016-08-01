@@ -1,5 +1,4 @@
-﻿using Common.Persistence.Ado;
-using Fixture.Domain;
+﻿using Fixture.Domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
