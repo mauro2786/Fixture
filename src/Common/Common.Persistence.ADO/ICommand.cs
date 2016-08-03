@@ -1,5 +1,4 @@
-﻿using Fixture.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 
@@ -18,41 +17,36 @@ namespace Common.Persistence.Ado
         /// <summary>
         /// Executes a statement, returns affected database rows.
         /// </summary>
-        /// <param name="queryString">Statement to be executed.</param>
         /// <returns>Affected database rows.</returns>
-        int ExecuteNonQuery(string queryString);
+        int ExecuteNonQuery();
 
         /// <summary>
         /// Executes statement, returns result as DataTable.
         /// </summary>
-        /// <param name="queryString">Statement to be executed.</param>
         /// <returns>Statement result as DataTable.</returns>
-        DataTable ExecuteQuery(string queryString);
+        DataTable ExecuteQuery();
 
         /// <summary>
         /// Executes statement and returns result as entity collection.
         /// </summary>
         /// <typeparam name="TEntity">Entity type.</typeparam>
-        /// <param name="queryString">Statement to be executed.</param>
         /// <param name="mapper">Function that maps entity.</param>
         /// <returns>Mapped entity collection.</returns>
-        IEnumerable<TEntity> GetEntityCollection<TEntity>(string queryString, Func<IDataReader, TEntity> mapper) where TEntity : IEntity;
+        IEnumerable<TEntity> GetEntityCollection<TEntity>(Func<IDataReader, TEntity> mapper) where TEntity : class;
 
         /// <summary>
         /// Executes statement and returns first result mapped to an entity.
         /// </summary>
         /// <typeparam name="TEntity">Entity type.</typeparam>
-        /// <param name="queryString">Statement to be executed.</param>
         /// <param name="mapper">Function that maps result to entity.</param>
         /// <returns>Mapped entity.</returns>
-        TEntity GetEntity<TEntity>(string queryString, Func<IDataReader, TEntity> mapper) where TEntity : IEntity;
+        TEntity GetEntity<TEntity>(Func<IDataReader, TEntity> mapper) where TEntity : class;
 
         /// <summary>
         /// Inserts a new entity row on specified table.
         /// </summary>
         /// <typeparam name="TId">Entity Id type</typeparam>
-        /// <param name="queryString">Statement to be executed.</param>
         /// <returns>Created row id.</returns>
-        TId CreateEntity<TId>(string queryString);
+        TId CreateEntity<TId>();
     }
 }

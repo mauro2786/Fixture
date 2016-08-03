@@ -1,5 +1,4 @@
-﻿using Fixture.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,9 +29,10 @@ namespace Common.Persistence.Ado
 
         //public delegate TEntity EntityMapper<TEntity>(IDataReader reader);
 
-        public Command(string connectionString)
+        public Command(string connectionString, string queryString)
         {
             this.connectionString = connectionString;
+            this.queryString = queryString;
         }
 
         /// <summary>
@@ -67,10 +67,8 @@ namespace Common.Persistence.Ado
         /// <param name="queryString">Statement to be executed.</param>
         /// <param name="execute">Actual execution.</param>
         /// <returns>Execution result.</returns>
-        private T Execute<T>(string queryString, Func<SqlCommand, T> execute)
+        private T Execute<T>(Func<SqlCommand, T> execute)
         {
-            this.queryString = queryString;
-
             using (var connection = new SqlConnection(connectionString))
             {
                 using (var command = new SqlCommand(this.queryString, connection))
@@ -100,7 +98,7 @@ namespace Common.Persistence.Ado
         /// <param name="execute">Actual execution.</param>
         /// <param name="mapper">Entity mapper.</param>
         /// <returns>Execution result.</returns>
-        private T ExecuteEntity<T, TEntity>(string queryString, Func<SqlCommand, Func<IDataReader, TEntity>, T> execute, Func<IDataReader, TEntity> mapper)
+        private T ExecuteEntity<T, TEntity>(Func<SqlCommand, Func<IDataReader, TEntity>, T> execute, Func<IDataReader, TEntity> mapper)
         {
             using (var connection = new SqlConnection(connectionString))
             {
@@ -128,20 +126,14 @@ namespace Common.Persistence.Ado
         /// </summary>
         /// <param name="queryString">Statement to be executed.</param>
         /// <returns>Affected database rows.</returns>
-        public int ExecuteNonQuery(string queryString)
-        {
-            return Execute(queryString, command => command.ExecuteNonQuery());
-        }
+        public int ExecuteNonQuery() => Execute(command => command.ExecuteNonQuery());
 
         /// <summary>
         /// Executes statement, returns result as DataTable.
         /// </summary>
         /// <param name="queryString">Statement to be executed.</param>
         /// <returns>Statement result as DataTable.</returns>
-        public DataTable ExecuteQuery(string queryString)
-        {
-            return Execute(queryString, ExecuteToDataTable);
-        }
+        public DataTable ExecuteQuery() => Execute(ExecuteToDataTable);
 
         protected DataTable ExecuteToDataTable(SqlCommand command)
         {
@@ -162,12 +154,10 @@ namespace Common.Persistence.Ado
         /// <param name="queryString">Statement to be executed.</param>
         /// <param name="mapper">Function that maps entity.</param>
         /// <returns>Mapped entity collection.</returns>
-        public IEnumerable<TEntity> GetEntityCollection<TEntity>(string queryString, Func<IDataReader, TEntity> mapper) where TEntity : IEntity
-        {
-            return ExecuteEntity(queryString, ExecuteGetEntityCollection, mapper);
-        }
+        public IEnumerable<TEntity> GetEntityCollection<TEntity>(Func<IDataReader, TEntity> mapper) where TEntity : class =>
+            ExecuteEntity(ExecuteGetEntityCollection, mapper);
 
-        private IEnumerable<TEntity> ExecuteGetEntityCollection<TEntity>(SqlCommand command, Func<IDataReader, TEntity> mapper)
+        protected IEnumerable<TEntity> ExecuteGetEntityCollection<TEntity>(SqlCommand command, Func<IDataReader, TEntity> mapper)
         {
             var listType = typeof(List<>).MakeGenericType(typeof(TEntity));
 
@@ -188,15 +178,12 @@ namespace Common.Persistence.Ado
         /// Executes statement and returns first result mapped to an entity.
         /// </summary>
         /// <typeparam name="TEntity">Entity type.</typeparam>
-        /// <param name="queryString">Statement to be executed.</param>
         /// <param name="mapper">Function that maps result to entity.</param>
         /// <returns>Mapped entity.</returns>
-        public TEntity GetEntity<TEntity>(string queryString, Func<IDataReader, TEntity> mapper) where TEntity : IEntity
-        {
-            return ExecuteEntity(queryString,ExecuteGetEntity, mapper);
-        }
+        public TEntity GetEntity<TEntity>(Func<IDataReader, TEntity> mapper) where TEntity : class =>
+            ExecuteEntity(ExecuteGetEntity, mapper);
 
-        private TEntity ExecuteGetEntity<TEntity>(SqlCommand command, Func<IDataReader, TEntity> mapper)
+        protected TEntity ExecuteGetEntity<TEntity>(SqlCommand command, Func<IDataReader, TEntity> mapper)
         {
             using (var reader = command.ExecuteReader())
             {
@@ -213,12 +200,9 @@ namespace Common.Persistence.Ado
         /// Inserts a new entity row on specified table.
         /// </summary>
         /// <typeparam name="TId">Entity Id type.</typeparam>
-        /// <param name="queryString">Statement to be executed.</param>
         /// <returns>Created row id.</returns>
-        public TId CreateEntity<TId>(string queryString)
-        {
-            return Execute(queryString, ExecuteCreateEntity<TId>);
-        }
+        public TId CreateEntity<TId>() =>
+            Execute(ExecuteCreateEntity<TId>);
 
         protected TId ExecuteCreateEntity<TId>(SqlCommand command)
         {
@@ -229,7 +213,7 @@ namespace Common.Persistence.Ado
             return Convert<TId>(lastInsertedId.ToString());
         }
 
-        private static T Convert<T>(string input)
+        private T Convert<T>(string input)
         {
             var converter = TypeDescriptor.GetConverter(typeof(T));
 

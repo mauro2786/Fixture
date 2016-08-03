@@ -9,9 +9,9 @@
             this.connectionString = connectionString;
         }
 
-        public ICommand CreateCommand()
+        public ICommand CreateCommand(string queryString)
         {
-            return new Command(connectionString);
+            return new Command(connectionString, queryString);
         }
     }
 }

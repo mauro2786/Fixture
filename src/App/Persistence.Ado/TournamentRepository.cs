@@ -21,31 +21,31 @@ namespace Fixture.Persistence.Ado
         {
             const string queryString = "SELECT Id, Name FROM fixture.Tournament";
 
-            var command = storage.CreateCommand();
+            var command = storage.CreateCommand(queryString);
 
-            return command.GetEntityCollection(queryString, MapEntity);
+            return command.GetEntityCollection(MapEntity);
         }
 
         public Tournament Get(int id)
         {
             const string queryString = "SELECT Id, Name FROM fixture.Tournament WHERE Id = @Id";
 
-            var command = storage.CreateCommand();
+            var command = storage.CreateCommand(queryString);
 
             command.AddParam(IdColumn, id);
 
-            return command.GetEntity(queryString, MapEntity);
+            return command.GetEntity(MapEntity);
         }
 
         public Tournament Create(Tournament entity)
         {
             const string queryString = "INSERT INTO fixture.Tournament (Name) VALUES(@Name)";
 
-            var command = storage.CreateCommand();
+            var command = storage.CreateCommand(queryString);
 
             command.AddParam(NameColumn, entity.Name);
 
-            var entityId = command.CreateEntity<int>(queryString);
+            var entityId = command.CreateEntity<int>();
 
             entity.Id = entityId;
 
@@ -56,12 +56,12 @@ namespace Fixture.Persistence.Ado
         {
             const string queryString = "UPDATE fixture.Tournament SET Name = @Name WHERE Id = @Id";
 
-            var command = storage.CreateCommand();
+            var command = storage.CreateCommand(queryString);
 
             command.AddParam(NameColumn, entity.Name);
             command.AddParam(IdColumn, entity.Id);
 
-            command.ExecuteNonQuery(queryString);
+            command.ExecuteNonQuery();
 
             return entity;
         }
@@ -70,11 +70,11 @@ namespace Fixture.Persistence.Ado
         {
             const string queryString = "DELETE FROM fixture.Tournament WHERE Id = @Id";
 
-            var command = storage.CreateCommand();
+            var command = storage.CreateCommand(queryString);
 
             command.AddParam(IdColumn, id);
 
-            command.ExecuteNonQuery(queryString);
+            command.ExecuteNonQuery();
         }
 
         public Tournament MapEntity(IDataReader reader)
