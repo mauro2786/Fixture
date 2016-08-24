@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 namespace Common.Persistence.Entity
 {
     //: IRepository<T, TId> ver si agregarselo
-    public abstract class RepositoryBase<T, TId>  where T : class
+    public abstract class RepositoryBase<TEntity, TId> : IRepository<TEntity, TId> where TEntity : class
     {
-        protected DbSet<T> set;
-        protected DbContext context;
+        protected DbSet<TEntity> set;
+        private DbContext context;
 
         public RepositoryBase(DbContext dbContext)
         {
             context = dbContext;
-            set = dbContext.Set<T>();
+            set = dbContext.Set<TEntity>();
         }
 
-        public T Create(T entity)
+        public TEntity Create(TEntity entity)
         {
             var result = set.Add(entity);
 
@@ -35,9 +35,18 @@ namespace Common.Persistence.Entity
             context.SaveChanges();
         }
 
-        public T Get(TId id)
+        public TEntity Get(TId id)
         {
             return set.Find(id);
+        }
+
+        public TEntity Update(TEntity entity)
+        {
+            var result = set.Attach(entity);
+
+            context.Entry(entity).State = EntityState.Modified;
+
+            return result;
         }
     }
 }
