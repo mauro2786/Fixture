@@ -75,15 +75,21 @@ namespace Common.Persistence.Ado
                 {
                     AddParams(command);
 
+                    connection.Open();
+
+                    command.Transaction = connection.BeginTransaction();
+
                     try
                     {
-                        connection.Open();
+                        var result = execute(command);
 
-                        return execute(command);
+                        command.Transaction.Commit();
+
+                        return result;
                     }
-                    catch (SqlException ex)
+                    catch (SqlException)
                     {
-                        Console.WriteLine(ex.Message);
+                        command.Transaction.Rollback();
                         throw;
                     }
                 }
