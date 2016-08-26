@@ -1,19 +1,15 @@
-﻿using Fixture.Domain;
-using Fixture.Persistence.Entity.Mappings;
-using System;
+﻿using System;
 using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Reflection;
-using System.Web.Compilation;
 
 namespace Fixture.Persistence.Entity
 {
     public class Context : DbContext
     {
         private const string FixtureSchema = "fixture";
-        private const string MappingClassPostfix = "Mapping";
+        private const string MappingClassPostfix = "Configuration";
         
         public Context(string connectionString)
             : base(connectionString)

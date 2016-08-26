@@ -33,6 +33,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fixture.Persistence.Entity"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Persistence.Entity", "src\Common\Common.Persistence.Entity\Common.Persistence.Entity.csproj", "{735FED74-AF63-4EE9-A905-9D295388F205}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Persistence.NHibernate", "src\Common\Common.Persistence.Nhibernate\Common.Persistence.NHibernate.csproj", "{343773F6-F367-476C-884A-7FD1A392DB86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fixture.Persistence.NHibernate", "src\App\Fixture.Persistence.Nhibernate\Fixture.Persistence.NHibernate.csproj", "{A088128A-7C0B-4B16-A592-C53C29E2547C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +87,14 @@ Global
 		{735FED74-AF63-4EE9-A905-9D295388F205}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{735FED74-AF63-4EE9-A905-9D295388F205}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{735FED74-AF63-4EE9-A905-9D295388F205}.Release|Any CPU.Build.0 = Release|Any CPU
+		{343773F6-F367-476C-884A-7FD1A392DB86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{343773F6-F367-476C-884A-7FD1A392DB86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{343773F6-F367-476C-884A-7FD1A392DB86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{343773F6-F367-476C-884A-7FD1A392DB86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A088128A-7C0B-4B16-A592-C53C29E2547C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A088128A-7C0B-4B16-A592-C53C29E2547C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A088128A-7C0B-4B16-A592-C53C29E2547C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A088128A-7C0B-4B16-A592-C53C29E2547C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,5 +111,7 @@ Global
 		{0611D262-B4B8-4DE0-9C2B-858440147ED5} = {DB9CDBF8-E116-4F2B-B35A-3B736E8EFAC6}
 		{3DD4791D-2CD8-4DF9-8295-50B33E86F935} = {D108A11C-8A40-4396-8D93-D7DF23065016}
 		{735FED74-AF63-4EE9-A905-9D295388F205} = {DB9CDBF8-E116-4F2B-B35A-3B736E8EFAC6}
+		{343773F6-F367-476C-884A-7FD1A392DB86} = {DB9CDBF8-E116-4F2B-B35A-3B736E8EFAC6}
+		{A088128A-7C0B-4B16-A592-C53C29E2547C} = {D108A11C-8A40-4396-8D93-D7DF23065016}
 	EndGlobalSection
 EndGlobal

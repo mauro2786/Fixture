@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.WebApi;
+using Fixture.Persistence.NHibernate.Configuration;
+using NHibernate;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity;
@@ -28,10 +30,13 @@ namespace API
             var assemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>();
 
             //Configures Ado data access and repositories dependencies
-            //ConfigureAdoDependencies(assemblies);
+            ConfigureAdoDependencies(assemblies);
 
-            //Configures Ado data access and repositories dependencies
-            ConfigureEntityDependencies(assemblies);
+            //Configures Entity Framework data access and repositories dependencies
+            //ConfigureEntityDependencies(assemblies);
+
+            //Configures NHibernate data access and repositories dependencies
+            //ConfigureNhibernateDependencies(assemblies);
 
             //Configures Services dependencies
             ConfigureServicesDependencies(assemblies);
@@ -93,6 +98,26 @@ namespace API
                 .As<DbContext>()
                 .WithParameter(new TypedParameter(typeof(string), ConfigurationManager.ConnectionStrings[DefaultConnectionString].ToString()))
                 .InstancePerRequest();
+        }
+        
+        /// <summary>
+        /// Configures NHibernate data access and repositories dependencies
+        /// </summary>
+        private static void ConfigureNhibernateDependencies(IEnumerable<Assembly> assemblies)
+        {
+            const string NhibernatePersistenceAssemblyName = "Fixture.Persistence.NHibernate";
+
+            var persistenceAssembly = assemblies.First(x => x.FullName.Contains(NhibernatePersistenceAssemblyName));
+
+            builder.RegisterAssemblyTypes(persistenceAssembly)
+               .Where(t => t.Name.EndsWith(PersistenceObjectPostfix))
+               .AsImplementedInterfaces()
+               .InstancePerLifetimeScope();
+
+            builder.Register(x => NHibernateConfigurator.CreateSessionFactory(ConfigurationManager.ConnectionStrings[DefaultConnectionString].ToString()));
+
+            builder.Register(x => x.Resolve<ISessionFactory>().OpenSession())
+                    .InstancePerRequest();
         }
     }
 }

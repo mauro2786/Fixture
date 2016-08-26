@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fixture.Persistence.Entity.Mappings
+namespace Fixture.Persistence.Entity.Configurations
 {
-    internal class TournamentMapping : EntityTypeConfiguration<Tournament>
+    internal class TournamentConfiguration : EntityTypeConfiguration<Tournament>
     {
-        public TournamentMapping()
+        public TournamentConfiguration()
         {            
             HasKey(x => x.Id);
             Property(x => x.Name);

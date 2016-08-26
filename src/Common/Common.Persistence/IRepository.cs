@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Common.Persistence
 {
-    public interface IRepository<T, TId>
+    public interface IRepository<TEntity, TId> where TEntity : class
     {
-        T Create(T entity);
+        TEntity Create(TEntity entity);
 
-        T Get(TId id);
+        TEntity Get(TId id);
 
-        T Update(T entity);
+        TEntity Update(TEntity entity);
 
         void Delete(TId id);
     }
