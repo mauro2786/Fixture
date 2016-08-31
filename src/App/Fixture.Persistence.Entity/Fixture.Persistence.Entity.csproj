@@ -50,8 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\MatchConfiguration.cs" />
+    <Compile Include="Configurations\TeamConfiguration.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Configurations\TournamentConfiguration.cs" />
+    <Compile Include="Configurations\MatchTypeConfiguration.cs" />
+    <Compile Include="Conventions\ForeignKeyNamingConvention.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TournamentRepository.cs" />
   </ItemGroup>

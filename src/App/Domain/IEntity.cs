@@ -1,9 +1,7 @@
 ﻿namespace Fixture.Domain
 {
-    public interface IEntity
+    public interface IIdentifiable
     {
         int? Id { get; set; }
-
-        string Name { get; set; }
     }
 }

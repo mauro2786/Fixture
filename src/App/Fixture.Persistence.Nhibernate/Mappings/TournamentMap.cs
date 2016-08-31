@@ -9,6 +9,7 @@ namespace Fixture.Persistence.Nhibernate.Mappings
         {
             Id(x => x.Id).GeneratedBy.Native();
             Map(x => x.Name);
+            HasMany(x => x.Matches);
         }
     }
 }

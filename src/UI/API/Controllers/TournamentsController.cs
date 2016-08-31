@@ -1,7 +1,7 @@
-﻿using Fixture.Domain;
-using Fixture.Services;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Http;
+using Fixture.Domain;
+using Fixture.Services;
 
 namespace API.Controllers
 {
@@ -14,16 +14,16 @@ namespace API.Controllers
             this.tournamentService = tournamentService;
         }
 
-        // GET api/Tournaments/
-        public IEnumerable<Tournament> Get() => tournamentService.Get();
+        // GET api/Tournaments/?extended=true
+        public IEnumerable<Tournament> Get(bool extended = false) => tournamentService.Get(extended);
 
         // GET api/Tournaments/{id}
-        public Tournament Get(int id) => tournamentService.Get(id);        
+        public Tournament Get(int id) => tournamentService.Get(id);
 
         // POST api/Tournaments/
-        public Tournament Create(Tournament tournament) => tournamentService.Create(tournament);        
+        public Tournament Create(Tournament tournament) => tournamentService.Create(tournament);
 
-        // DELETE api/Tournaments/{id}
+        // DELETE api/Tournaments/{id}        
         public void Delete(int id) => tournamentService.Delete(id);
 
         // PUT api/Tournaments/{id}

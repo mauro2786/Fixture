@@ -1,5 +1,4 @@
 ﻿using NHibernate;
-using System;
 
 namespace Common.Persistence.NHibernate
 {

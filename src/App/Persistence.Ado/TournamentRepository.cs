@@ -1,7 +1,7 @@
-﻿using Common.Persistence.Ado;
-using Fixture.Domain;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
+using Common.Persistence.Ado;
+using Fixture.Domain;
 
 namespace Fixture.Persistence.Ado
 {
@@ -15,7 +15,7 @@ namespace Fixture.Persistence.Ado
         public TournamentRepository(Storage storage)
         {
             this.storage = storage;
-        }        
+        }
 
         public IEnumerable<Tournament> Get()
         {
@@ -84,6 +84,12 @@ namespace Fixture.Persistence.Ado
                 Id = (int)reader[IdColumn],
                 Name = reader[NameColumn].ToString()
             };
-        }        
+        }
+
+        //TODO: implement method that gets tournament with all its entities
+        public IEnumerable<Tournament> Get(bool extended)
+        {
+            return Get();
+        }
     }
 }

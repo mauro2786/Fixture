@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Routing;
 
@@ -34,6 +31,14 @@ namespace API
                 defaults: new { },
                 constraints: new { httpMethod = new HttpMethodConstraint(HttpMethod.Delete, HttpMethod.Put) }
             );
+
+            ConfigureSerializer(config);
+        }
+
+        private static void ConfigureSerializer(HttpConfiguration config)
+        {
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
         }
     }
 }

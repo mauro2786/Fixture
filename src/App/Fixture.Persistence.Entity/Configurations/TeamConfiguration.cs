@@ -3,13 +3,12 @@ using Fixture.Domain;
 
 namespace Fixture.Persistence.Entity.Configurations
 {
-    internal class TournamentConfiguration : EntityTypeConfiguration<Tournament>
+    public class TeamConfiguration : EntityTypeConfiguration<Team>
     {
-        public TournamentConfiguration()
+        public TeamConfiguration()
         {
             //HasKey(x => x.Id);
             //Property(x => x.Name);
-            //HasMany(x => x.Matches);
         }
     }
 }

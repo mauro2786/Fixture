@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Reflection;
+using Fixture.Persistence.Entity.Conventions;
 
 namespace Fixture.Persistence.Entity
 {
@@ -10,7 +11,7 @@ namespace Fixture.Persistence.Entity
     {
         private const string FixtureSchema = "fixture";
         private const string MappingClassPostfix = "Configuration";
-        
+
         public Context(string connectionString)
             : base(connectionString)
         {
@@ -22,8 +23,9 @@ namespace Fixture.Persistence.Entity
 
             //Removes the plural table names convention so that it works with singular named tables
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Conventions.Add(new ForeignKeyNamingConvention());
 
-            AddMappingConfigurations(modelBuilder);            
+            AddMappingConfigurations(modelBuilder);
         }
 
         /// <summary>

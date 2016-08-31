@@ -71,26 +71,27 @@ namespace Common.Persistence.Ado
         {
             using (var connection = new SqlConnection(connectionString))
             {
-                using (var command = new SqlCommand(this.queryString, connection))
+                connection.Open();
+
+                using (var transaction = connection.BeginTransaction())
                 {
-                    AddParams(command);
-
-                    connection.Open();
-
-                    command.Transaction = connection.BeginTransaction();
-
-                    try
+                    using (var command = new SqlCommand(this.queryString, connection, transaction))
                     {
-                        var result = execute(command);
+                        AddParams(command);
 
-                        command.Transaction.Commit();
+                        try
+                        {
+                            var result = execute(command);
 
-                        return result;
-                    }
-                    catch (SqlException)
-                    {
-                        command.Transaction.Rollback();
-                        throw;
+                            transaction.Commit();
+
+                            return result;
+                        }
+                        catch (SqlException)
+                        {
+                            transaction.Rollback();
+                            throw;
+                        }
                     }
                 }
             }

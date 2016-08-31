@@ -1,6 +1,6 @@
-﻿using Fixture.Persistence;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Fixture.Domain;
+using Fixture.Persistence;
 using Fixture.Services;
 
 namespace Fixture.ServicesImpl
@@ -14,9 +14,9 @@ namespace Fixture.ServicesImpl
             this.tournamentRepository = tournamentRepository;
         }
 
-        public IEnumerable<Tournament> Get()
+        public IEnumerable<Tournament> Get(bool extended)
         {
-            return tournamentRepository.Get();
+            return tournamentRepository.Get(extended);
         }
 
         public Tournament Get(int id)

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
-using Fixture.Domain;
+using System.Linq;
 using Common.Persistence.NHibernate;
+using Fixture.Domain;
 using NHibernate;
 using NHibernate.Linq;
 
@@ -12,9 +13,14 @@ namespace Fixture.Persistence.NHibernate
         {
         }
 
-        public IEnumerable<Tournament> Get()
+        public IEnumerable<Tournament> Get(bool extended)
         {
-            return session.Query<Tournament>();
+            if (extended)
+                return session.Query<Tournament>().ToList();
+
+            return session.Query<Tournament>()
+                            .Select(x => new Tournament { Id = x.Id, Name = x.Name })
+                            .ToList();
         }
     }
 }

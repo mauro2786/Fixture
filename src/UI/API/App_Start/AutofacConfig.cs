@@ -1,14 +1,14 @@
-﻿using Autofac;
-using Autofac.Integration.WebApi;
-using Fixture.Persistence.NHibernate.Configuration;
-using NHibernate;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Reflection;
 using System.Web.Compilation;
 using System.Web.Http;
+using Autofac;
+using Autofac.Integration.WebApi;
+using Fixture.Persistence.NHibernate.Configuration;
+using NHibernate;
 
 namespace API
 {
@@ -30,10 +30,10 @@ namespace API
             var assemblies = BuildManager.GetReferencedAssemblies().Cast<Assembly>();
 
             //Configures Ado data access and repositories dependencies
-            ConfigureAdoDependencies(assemblies);
+            //ConfigureAdoDependencies(assemblies);
 
             //Configures Entity Framework data access and repositories dependencies
-            //ConfigureEntityDependencies(assemblies);
+            ConfigureEntityDependencies(assemblies);
 
             //Configures NHibernate data access and repositories dependencies
             //ConfigureNhibernateDependencies(assemblies);
@@ -99,7 +99,7 @@ namespace API
                 .WithParameter(new TypedParameter(typeof(string), ConfigurationManager.ConnectionStrings[DefaultConnectionString].ToString()))
                 .InstancePerRequest();
         }
-        
+
         /// <summary>
         /// Configures NHibernate data access and repositories dependencies
         /// </summary>
